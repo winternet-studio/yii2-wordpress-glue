@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace HenryVolkmer\Yii2Wordpress\Components;
 
+use Yii;
+use HenryVolkmer\Yii2Wordpress\Interfaces\AssetBundleInterface;
 use \wp_enqueue_script;
 use \wp_enqueue_style;
 
@@ -31,7 +33,8 @@ class View extends \yii\web\View
             }
            
             foreach ($bundle->js as $script) {
-                wp_enqueue_script($name, $bundle->baseUrl . '/' . $script, [], false, true);
+                $jsDeps = ($bundle instanceof AssetBundleInterface ? $bundle->getJsDeps() : []);
+                wp_enqueue_script($name, $bundle->baseUrl . '/' . $script, $jsDeps, false, true);
             }
 
             foreach ($bundle->css as $style) {

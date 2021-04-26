@@ -4,30 +4,44 @@ declare(strict_types=1);
 
 namespace HenryVolkmer\Yii2Wordpress;
 
+use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Application;
 use \add_action;
 use \get_post;
+use \WP_Post;
 
-require_once dirname(__FILE__, 2) . '/yiisoft/yii2/Yii.php';
+require_once dirname(__FILE__, 4) . '/yiisoft/yii2/Yii.php';
 
-class Kernel
+class KernelRunner
 {
     private bool $debug;
     private $appConf = [];
 
-    public function __construct(array $appConf, bool $isDebug=false)
+    public function __construct(array $appConf=[], bool $isDebug=false)
     {
         $this->debug = $isDebug;
+
+        Yii::setAlias('@plugin', dirname(__FILE__, 5));
+
+        if (!isset($_ENV['WP_PLUGIN_FOLDERNAME'])) {
+            $_ENV['WP_PLUGIN_FOLDERNAME'] = basename(dirname(__FILE__, 5));
+        }
+
         $this->appConf = ArrayHelper::merge(
-            require dirname(__FILE__, 2) . '/yii2-wordpress-glue/src/Resources/Services/services.php',
+            require dirname(__FILE__, 2) . '/src/Resources/Services/services.php',
             $appConf
         );
     }
 
+    public function getAppConfig(): array
+    {
+        return $this->appConf;
+    }
+
     public function run()
     {
-        new Application($this->appConfig);
+        new Application($this->appConf);
 
         if (!$this->debug) {
             Yii::$app->errorHandler->unregister();

@@ -1,12 +1,12 @@
 {
-    "name": "HenryVolkmer/yii2-wordpress-glue",
+    "name": "henryvolkmer/yii2-wordpress-glue",
     "description": "Toolkit for Wordpress-Plugin Development with yii2-framework",
     "type": "project",
     "license": "MIT",
     "authors": [
         {
             "name": "Henry Volkmer",
-            "email": "henry.volkmer@mailbox.org",
+            "email": "henry.volkmer@mailbox.org"
         }
     ],
     "minimum-stability": "dev",
@@ -21,6 +21,7 @@
             "HenryVolkmer\\Yii2Wordpress\\": "src/"
         }
     },
+    "bin": ["src/bin/yii2wp"],
     "require": {
         "php": ">=7.3",
         "yiisoft/yii2": ">=2.0.25 <2.1",

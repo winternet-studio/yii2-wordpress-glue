@@ -130,7 +130,7 @@ class ModelRegistry extends Component
         return $this;
     }
 
-    public function findByPostId(int $postId): ModelRegistry
+    public function findByPostId($postId): ModelRegistry
     {
         foreach ($this->getInternal($this->postTypes) as $key => $model) {
             $finder = $model::find();

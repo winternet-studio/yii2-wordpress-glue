@@ -10,6 +10,7 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use kartik\detail\DetailView;
 use HenryVolkmer\Yii2Wordpress\Interfaces\TabAwareInterface;
+use \admin_enqueue_scripts;
 
 /**
  * Displays Tabs in Backend for your Module.
@@ -25,6 +26,10 @@ class Tabs extends Widget
         parent::init();
 
         global $post;
+  
+        $view = $this->getView();
+        $view->registerAssetBundle(TabAssetBundle::class);
+        $view->registerAssetsToWp();
 
         Yii::$app->modelRegistry
             // Process only current post type
