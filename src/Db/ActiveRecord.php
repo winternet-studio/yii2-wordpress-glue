@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace HenryVolkmer\Yii2Wordpress\Db;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use HenryVolkmer\Yii2Wordpress\Models\WpPost;
 use HenryVolkmer\Yii2Wordpress\Db\ActiveQuery;
 use \get_called_class;
@@ -16,6 +17,12 @@ class ActiveRecord extends \yii\db\ActiveRecord
         $this->modelClass = static::class;
 
         return parent::beforeSave($insert);
+    }
+
+    public static function instantiate($row)
+    {
+        $class = ArrayHelper::getValue($row, 'modelClass', static::class);
+        return new $class;
     }
 
     public static function find()
