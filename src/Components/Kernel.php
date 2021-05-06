@@ -14,20 +14,5 @@ class Kernel implements BootstrapInterface
 {
     public function bootstrap($app)
     {
-        Event::on(
-            ActiveRecord::class,
-            ActiveRecord::EVENT_INIT,
-            function (Event $event) use ($app) {
-                if (!$event->sender->hasAttribute('modelClass')) {
-                    return;
-                }
-                /*
-                $event->sender->attachBehavior(
-                    ArStoreModelClassName::class,
-                    ArStoreModelClassName::class
-                );
-                */
-            }
-        );
     }
 }

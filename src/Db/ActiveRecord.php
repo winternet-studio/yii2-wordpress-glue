@@ -9,12 +9,24 @@ use yii\helpers\ArrayHelper;
 use HenryVolkmer\Yii2Wordpress\Models\WpPost;
 use HenryVolkmer\Yii2Wordpress\Db\ActiveQuery;
 use \get_called_class;
+use \add_action;
 
 class ActiveRecord extends \yii\db\ActiveRecord
 {
+    public function init()
+    {
+        add_action('wp_trash_post', function ($post_id) {
+            $obj = self::find()->where(['pid' => $post_id])->one();
+            if ($obj) {
+                $obj->delete();
+            }
+        });
+    }
+
     public function beforeSave($insert)
     {
         $this->modelClass = static::class;
+        $this->title = $this->wpPost->post_title;
 
         return parent::beforeSave($insert);
     }
