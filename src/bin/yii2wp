@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-use HenryVolkmer\Yii2Wordpress\Kernel;
+use HenryVolkmer\Yii2Wordpress\KernelRunner;
 
 /**
  * Yii console bootstrap file.
@@ -10,12 +10,12 @@ if (false === in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true)) {
     echo 'Warning: The console should be invoked via the CLI version of PHP, not the '.\PHP_SAPI.' SAPI'.\PHP_EOL;
 }
 
-require_once dirname(__DIR__, 4) . '/autoload.php';
+require_once dirname(__DIR__, 1) . '/autoload.php';
 
-$wpconf=dirname(__DIR__, 8) . '/wp-config.php';
+$wpconf=dirname(__DIR__, 5) . '/wp-config.php';
 eval(str_replace(["<?php","require_once"], ["","// require_once"], file_get_contents($wpconf)));
 
-$kernel = new Kernel();
+$kernel = new KernelRunner();
 $application = new \yii\console\Application($kernel->getAppConfig());
 
 $exitCode = $application->run();

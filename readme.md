@@ -52,7 +52,10 @@ Refer to the [Yii2-Documentation](https://www.yiiframework.com/doc/guide/2.0/en/
 
 ## Migrations
 
-In order to create a db-table, use the Yii2-Db-Migtation as follows:
+- create a Folter "Migrations" in your Application (wp-content/plugins/awesome-plugin/Migrations)
+- on the cli: `vendor/bin/yii2wp migrate/create 'MyMigrationName'`
+
+A new File should be generated in your Migrations Folder:
 
 ```php
 <?php
@@ -77,3 +80,7 @@ class m191119_103515_createTables extends \yii\db\Migration
 	}
 }
 ```
+
+#### Core Migration
+
+`vendor/bin/yii2wp migrate/create --migrationPath=@Yii2Wordpress/Migrations 'AddTemplates'`

@@ -12,6 +12,7 @@ if (!is_dir($assetDir)) {
 return [
     'id' => 'yii2wp-app',
     'aliases' => [
+        '@Yii2Wordpress' => dirname(__DIR__, 2),
         '@app' => dirname(__DIR__, 6),
         '@assetCache' => $assetDir,
         '@log' => dirname(__DIR__, 8),
@@ -21,6 +22,16 @@ return [
     'basePath' => dirname(__DIR__, 6),
     'params' => [
         'bsVersion' => 4
+    ],
+    'controllerMap' => [
+        'migrate' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationPath' => [
+                '@app/Migrations',
+                '@Yii2Wordpress/Migrations',
+            ],
+            'migrationTable' => 'migrations_' . $_ENV['WP_PLUGIN_FOLDERNAME']
+        ],
     ],
     'bootstrap' => ['log','kernel'],
     'components' => [
