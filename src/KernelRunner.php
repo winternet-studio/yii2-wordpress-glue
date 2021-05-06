@@ -22,8 +22,16 @@ class KernelRunner
     {
         $this->debug = $isDebug;
 
+        /**
+         * The Path to the origin Plugin
+         * Origin Plugin is the Plugin which make useage of
+         * Yii2Wordpress.
+         */
         Yii::setAlias('@plugin', dirname(__FILE__, 5));
 
+        /**
+         * The origin Plugin Name
+         */
         if (!isset($_ENV['WP_PLUGIN_FOLDERNAME'])) {
             $_ENV['WP_PLUGIN_FOLDERNAME'] = basename(dirname(__FILE__, 5));
         }
