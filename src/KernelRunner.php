@@ -17,10 +17,10 @@ require_once dirname(__FILE__, 4) . '/yiisoft/yii2/Yii.php';
 
 class KernelRunner
 {
-    private bool $debug;
+    private $debug;
     private $appConf = [];
 
-    public function __construct(array $appConf=[], bool $isDebug=false)
+    public function __construct(array $appConf=[], string $wpPluginFile=null, bool $isDebug=false)
     {
         $this->debug = $isDebug;
 
@@ -30,6 +30,7 @@ class KernelRunner
          * Yii2Wordpress.
          */
         Yii::setAlias('@plugin', dirname(__FILE__, 5));
+        Yii::setAlias('@pluginBootstrapFile', $wpPluginFile);
 
         /**
          * The origin Plugin Name
@@ -64,10 +65,10 @@ class KernelRunner
         /**
          * Installation
          */
-        register_activation_hook(Yii::getAlias('@plugin'), function () {
+        register_activation_hook(Yii::getAlias('@pluginBootstrapFile'), function () {
             $webApp = Yii::$app;
             new \yii\console\Application($this->appConf);
-            Yii::$app->runAction('migrate/up', ['interactive' => false]);
+            $res = Yii::$app->runAction('migrate/up', ['interactive' => false]);
             Yii::$app = $webApp;
         });
 

@@ -1,5 +1,7 @@
 <?php
 
+use HenryVolkmer\Yii2Wordpress\Helpers\StringHelper;
+
 if (!isset($_ENV['WP_PLUGIN_FOLDERNAME'])) {
     throw new \Exception('The $_ENV["WP_PLUGIN_FOLDERNAME"] is not set!');
 }
@@ -30,7 +32,7 @@ return [
                 '@app/Migrations',
                 '@Yii2Wordpress/Migrations',
             ],
-            'migrationTable' => 'migrations_' . $_ENV['WP_PLUGIN_FOLDERNAME']
+            'migrationTable' => 'migrations_' . StringHelper::standardize($_ENV['WP_PLUGIN_FOLDERNAME'])
         ],
     ],
     'bootstrap' => ['log','kernel'],
