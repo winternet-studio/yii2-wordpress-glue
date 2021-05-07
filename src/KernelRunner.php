@@ -10,6 +10,8 @@ use yii\web\Application;
 use \add_action;
 use \get_post;
 use \WP_Post;
+use \register_activation_hook;
+use \register_uninstall_hook;
 
 require_once dirname(__FILE__, 4) . '/yiisoft/yii2/Yii.php';
 
@@ -58,6 +60,27 @@ class KernelRunner
         if (!Yii::$app->session->isActive) {
             Yii::$app->session->open();
         }
+
+        /**
+         * Installation
+         */
+        register_activation_hook(Yii::getAlias('@plugin'), function () {
+            $webApp = Yii::$app;
+            new \yii\console\Application($this->appConf);
+            Yii::$app->runAction('migrate/up', ['interactive' => false]);
+            Yii::$app = $webApp;
+        });
+
+        /**
+         * Exception: Serialization of 'Closure' is not allowed
+         *
+        register_uninstall_hook(Yii::getAlias('@plugin'), function () {
+            $webApp = Yii::$app;
+            new \yii\console\Application($this->appConf);
+            Yii::$app->runAction('migrate/down', ['all' => 'all','interactive' => false]);
+            Yii::$app = $webApp;
+        });
+        */
 
         /**
          * add Tab-Navigation to backend => wp_post-edit
