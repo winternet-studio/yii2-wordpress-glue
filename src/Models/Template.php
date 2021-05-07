@@ -129,10 +129,21 @@ class Template extends ActiveRecord implements Interfaces\WpPostInterface, Inter
         ];
     }
 
-    public function getFilePath(): string
+    /**
+     * Dont translate @-prefixed path here.
+     * Otherwise, a controller is needed to locate the viewfile.
+     * The View File *MUST* beginn with '@'
+     * @see yii\base\View:172
+     */
+    public function getFilePath($resolve=true): string
     {
         $fileName = $this->wpPost ? StringHelper::standardize($this->wpPost->post_title) : $this->pid;
 
-        return Yii::getAlias('@plugin/Templates/' . $fileName . '_' . $this->pid . '.php');
+        $filePath = '@plugin/Templates/' . $fileName . '_' . $this->pid . '.php';
+
+        if ($resolve) {
+            return Yii::getAlias($filePath);
+        }
+        return $filePath;
     }
 }
