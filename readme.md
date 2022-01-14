@@ -7,7 +7,7 @@ Development of Wordpress plugins with Yii2 framework
 
 Create a new Wordpress plugin by creating a new folder in eg. `wp-content/plugins/awesome-plugin` and run/execute these tasks that that folder:
 
-- create a new `composer.json`-File and require `HenryVolkmer/yii2-wordpress-glue`
+- create a new `composer.json`-File and require `winternet-studio/yii2-wordpress-glue`
 - run `composer install`
 - create the wordpress plugin bootstrap file eg. `awesome-plugin.php`:
 
@@ -15,7 +15,7 @@ Create a new Wordpress plugin by creating a new folder in eg. `wp-content/plugin
 <?php
 // wp-content/plugins/awesome-plugin/awesome-plugin.php
 
-use HenryVolkmer\Yii2Wordpress\Kernel;
+use winternet\yii2wordpress\Kernel;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -61,7 +61,7 @@ A new File should be generated in your Migrations Folder:
 <?php
 
 use yii\db\Migration;
-use HenryVolkmer\Yii2Wordpress\Helpers;
+use winternet\yii2wordpress\Helpers;
 
 class m191119_103515_createTables extends \yii\db\Migration
 {

@@ -1,9 +1,13 @@
 {
-    "name": "henryvolkmer/yii2-wordpress-glue",
+    "name": "winternet-studio/yii2-wordpress-glue",
     "description": "Toolkit for Wordpress-Plugin Development with yii2-framework",
     "type": "project",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Allan Jensen",
+            "email": "yii2-libs@allanid.com"
+        },
         {
             "name": "Henry Volkmer",
             "email": "henry.volkmer@mailbox.org"
@@ -18,7 +22,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "HenryVolkmer\\Yii2Wordpress\\": "src/"
+            "winternet\\yii2wordpress\\": "src/"
         }
     },
     "bin": ["src/bin/yii2wp"],
@@ -26,7 +30,7 @@
         "php": ">=7.3",
         "yiisoft/yii2": ">=2.0.25 <2.1",
         "yiisoft/yii2-bootstrap4": "^2.0",
-        "kartik-v/yii2-detail-view": "dev-feature-tab-forceRenderEdit-labelPos",
+        "kartik-v/yii2-detail-view": "1.8.x-dev",
         "yiisoft/yii2-httpclient": "^2.0@dev",
         "kartik-v/yii2-widget-select2": "^2.1@dev",
         "kartik-v/yii2-date-range": "1.7.x-dev",
