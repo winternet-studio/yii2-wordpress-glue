@@ -9,7 +9,7 @@ use winternet\yii2wordpress\Interfaces\AssetBundleInterface;
 
 class TabAssetBundle extends AssetBundle implements AssetBundleInterface
 {
-    public $sourcePath = '@vendor/henryvolkmer/yii2-wordpress-glue/src/Widgets/Tabs/assets';
+    public $sourcePath = '@vendor/winternet-studio/yii2-wordpress-glue/src/Widgets/Tabs/assets';
     public $js = ['tabs.js'];
     public $css = ['tabs.css'];
 
