@@ -1,6 +1,6 @@
 {
     "name": "winternet-studio/yii2-wordpress-glue",
-    "description": "Toolkit for Wordpress-Plugin Development with yii2-framework",
+    "description": "Toolkit for Wordpress Plugin Development with Yii2 Framework",
     "type": "project",
     "license": "MIT",
     "authors": [

@@ -7,8 +7,21 @@ Development of Wordpress plugins with Yii2 framework
 
 Create a new Wordpress plugin by creating a new folder in eg. `wp-content/plugins/awesome-plugin` and run/execute these tasks that that folder:
 
-- create a new `composer.json`-File and require `winternet-studio/yii2-wordpress-glue`
-- run `composer install`
+- create `composer.json` with at least this (could not get it working without these settings):
+
+```php
+{
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "minimum-stability": "dev"
+}
+```
+
+- run `composer require winternet-studio/yii2-wordpress-glue "^1.0"`
 - create the wordpress plugin bootstrap file eg. `awesome-plugin.php`:
 
 ```php
