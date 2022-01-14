@@ -30,10 +30,10 @@ Create a new Wordpress plugin by creating a new folder in eg. `wp-content/plugin
 
 use winternet\yii2wordpress\Kernel;
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once(__DIR__ .'/vendor/autoload.php');
 
 $config = [
-    'language' => 'de',
+    'language' => 'en-US',
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
