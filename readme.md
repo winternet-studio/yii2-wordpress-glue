@@ -1,15 +1,15 @@
 Yii2-Wordpress-Glue
 ===================
 
-development of Wordpress-Plugins with yii2-framework
+Development of Wordpress plugins with Yii2 framework
 
-## Quick-Start
+## Quick Start
 
-create a new Wordpress-Plugin by creation of a new Folder in `wp-content/plugins/awesome-plugin` and run/execute these tasks inner the awesome-plugin folder (replace awesome-plugin with your Plugin-Name!):
+Create a new Wordpress plugin by creating a new folder in eg. `wp-content/plugins/awesome-plugin` and run/execute these tasks that that folder:
 
 - create a new `composer.json`-File and require `HenryVolkmer/yii2-wordpress-glue`
 - run `composer install`
-- create the wordpress plugin-bootstrap file `awesome-plugin.php`:
+- create the wordpress plugin bootstrap file eg. `awesome-plugin.php`:
 
 ```php
 <?php
@@ -31,9 +31,9 @@ $config = [
                 'myApp*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'forceTranslation' => true,
-                    'basePath' => dirname(__DIR__) . '/messages'
-                ]
-            ]
+                    'basePath' => dirname(__DIR__) . '/messages',
+                ],
+            ],
         ],
     ],
 ];
@@ -84,3 +84,7 @@ class m191119_103515_createTables extends \yii\db\Migration
 #### Core Migration
 
 `vendor/bin/yii2wp migrate/create --migrationPath=@Yii2Wordpress/Migrations 'AddTemplates'`
+
+## Credits
+
+This is a fork of [Henry Volkmer's project](https://github.com/HenryVolkmer/yii2-wordpress-glue).
