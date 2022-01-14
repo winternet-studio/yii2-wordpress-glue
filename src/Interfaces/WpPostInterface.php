@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace HenryVolkmer\Yii2Wordpress\Interfaces;
+namespace winternet\yii2wordpress\Interfaces;
 
 use yii\db\ActiveRecordInterface;
 

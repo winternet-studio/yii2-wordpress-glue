@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace HenryVolkmer\Yii2Wordpress\Components;
+namespace winternet\yii2wordpress\Components;
 
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\Event;
-use HenryVolkmer\Yii2Wordpress\Db\ActiveRecord;
-use HenryVolkmer\Yii2Wordpress\Behaviors\ArStoreModelClassName;
+use winternet\yii2wordpress\Db\ActiveRecord;
+use winternet\yii2wordpress\Behaviors\ArStoreModelClassName;
 
 class Kernel implements BootstrapInterface
 {

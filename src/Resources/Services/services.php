@@ -1,6 +1,6 @@
 <?php
 
-use HenryVolkmer\Yii2Wordpress\Helpers\StringHelper;
+use winternet\yii2wordpress\Helpers\StringHelper;
 
 if (!isset($_ENV['WP_PLUGIN_FOLDERNAME'])) {
     throw new \Exception('The $_ENV["WP_PLUGIN_FOLDERNAME"] is not set!');
@@ -38,7 +38,7 @@ return [
     'bootstrap' => ['log','kernel'],
     'components' => [
         'view' => [
-            'class' => 'HenryVolkmer\Yii2Wordpress\Components\View',
+            'class' => 'winternet\yii2wordpress\Components\View',
         ],
         'assetManager' => [
             'basePath' => '@assetCache',
@@ -53,7 +53,7 @@ return [
             ]
         ],
         'modelRegistry' => [
-            'class' => 'HenryVolkmer\Yii2Wordpress\Components\ModelRegistry',
+            'class' => 'winternet\yii2wordpress\Components\ModelRegistry',
         ],
         'db' => [
             'class' => 'yii\db\Connection',
@@ -75,7 +75,7 @@ return [
         ],
         // Application Kernel
         'kernel' => [
-            'class' => 'HenryVolkmer\Yii2Wordpress\Components\Kernel'
+            'class' => 'winternet\yii2wordpress\Components\Kernel'
         ]
     ]
 ];

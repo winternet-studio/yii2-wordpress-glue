@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace HenryVolkmer\Yii2Wordpress;
+namespace winternet\yii2wordpress;
 
 use Yii;
 use yii\helpers\ArrayHelper;

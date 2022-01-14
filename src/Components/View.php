@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace HenryVolkmer\Yii2Wordpress\Components;
+namespace winternet\yii2wordpress\Components;
 
 use Yii;
-use HenryVolkmer\Yii2Wordpress\Interfaces\AssetBundleInterface;
+use winternet\yii2wordpress\Interfaces\AssetBundleInterface;
 use \wp_enqueue_script;
 use \wp_enqueue_style;
 

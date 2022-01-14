@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace HenryVolkmer\Yii2Wordpress\Models;
+namespace winternet\yii2wordpress\Models;
 
 use Yii;
 use yii\db\ActiveQuery;
 use kartik\detail\DetailView;
-use HenryVolkmer\Yii2Wordpress\Helpers\StringHelper;
-use HenryVolkmer\Yii2Wordpress\Db\ActiveRecord;
-use HenryVolkmer\Yii2Wordpress\Interfaces as Interfaces;
+use winternet\yii2wordpress\Helpers\StringHelper;
+use winternet\yii2wordpress\Db\ActiveRecord;
+use winternet\yii2wordpress\Interfaces as Interfaces;
 use \register_post_type;
 use \is_dir;
 use \mkdir;

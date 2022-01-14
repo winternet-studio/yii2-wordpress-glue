@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace HenryVolkmer\Yii2Wordpress\Widgets\Tabs;
+namespace winternet\yii2wordpress\Widgets\Tabs;
 
 use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use kartik\detail\DetailView;
-use HenryVolkmer\Yii2Wordpress\Interfaces\TabAwareInterface;
+use winternet\yii2wordpress\Interfaces\TabAwareInterface;
 use \admin_enqueue_scripts;
 
 /**

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace HenryVolkmer\Yii2Wordpress\Models;
+namespace winternet\yii2wordpress\Models;
 
 use yii\db\ActiveQuery;
-use HenryVolkmer\Yii2Wordpress\Db\ActiveRecord;
+use winternet\yii2wordpress\Db\ActiveRecord;
 
 class WpPost extends ActiveRecord
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace HenryVolkmer\Yii2Wordpress\Widgets\Tabs;
+namespace winternet\yii2wordpress\Widgets\Tabs;
 
 use yii\web\AssetBundle;
-use HenryVolkmer\Yii2Wordpress\Interfaces\AssetBundleInterface;
+use winternet\yii2wordpress\Interfaces\AssetBundleInterface;
 
 class TabAssetBundle extends AssetBundle implements AssetBundleInterface
 {

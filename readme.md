@@ -28,7 +28,7 @@ Create a new Wordpress plugin by creating a new folder in eg. `wp-content/plugin
 <?php
 // wp-content/plugins/awesome-plugin/awesome-plugin.php
 
-use winternet\yii2wordpress\Kernel;
+use winternet\yii2wordpress\KernelRunner;
 
 require_once(__DIR__ .'/vendor/autoload.php');
 
@@ -52,7 +52,7 @@ $config = [
 ];
 
 $isDebug = (isset($_ENV['DEBUG']) && $_ENV['DEBUG'] === true);
-$kernel = new KernelRunner($config,$isDebug);
+$kernel = new KernelRunner($config, $isDebug);
 $kernel->run();
 ```
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace HenryVolkmer\Yii2Wordpress\Widgets\Tabs;
+namespace winternet\yii2wordpress\Widgets\Tabs;
 
 /**
  * Wordpress render its own <form>-Tags.

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace HenryVolkmer\Yii2Wordpress\Components;
+namespace winternet\yii2wordpress\Components;
 
 use Yii;
 use yii\base\Component;
-use HenryVolkmer\Yii2Wordpress\Interfaces\WpPostInterface;
+use winternet\yii2wordpress\Interfaces\WpPostInterface;
 
 /**
  * Model registry holds all models which are affected by WordPress CRUD-Operations.

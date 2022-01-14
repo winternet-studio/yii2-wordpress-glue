@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace HenryVolkmer\Yii2Wordpress\Helpers;
+namespace winternet\yii2wordpress\Helpers;
 
 class StringHelper extends \yii\helpers\StringHelper
 {

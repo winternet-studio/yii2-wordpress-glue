@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace HenryVolkmer\Yii2Wordpress\Db;
+namespace winternet\yii2wordpress\Db;
 
 use Yii;
 use yii\helpers\ArrayHelper;
-use HenryVolkmer\Yii2Wordpress\Models\WpPost;
-use HenryVolkmer\Yii2Wordpress\Db\ActiveQuery;
+use winternet\yii2wordpress\Models\WpPost;
+use winternet\yii2wordpress\Db\ActiveQuery;
 use \get_called_class;
 use \add_action;
 

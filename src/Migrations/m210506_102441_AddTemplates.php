@@ -1,8 +1,8 @@
 <?php
 
 use yii\db\Migration;
-use HenryVolkmer\Yii2Wordpress\Helpers\MigrationHelper;
-use HenryVolkmer\Yii2Wordpress\Models\Template;
+use winternet\yii2wordpress\Helpers\MigrationHelper;
+use winternet\yii2wordpress\Models\Template;
 
 /**
  * Class m210506_102441_AddTemplates
