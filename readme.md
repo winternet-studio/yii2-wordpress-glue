@@ -20,8 +20,8 @@ Create a new Wordpress plugin by creating a new folder in eg. `wp-content/plugin
 }
 ```
 
-- run `composer require winternet-studio/yii2-wordpress-glue "^1.0"`
-- create the wordpress plugin bootstrap file eg. `awesome-plugin.php`:
+- run `composer require winternet-studio/yii2-wordpress-glue`
+- create the wordpress plugin bootstrap file eg. `awesome-plugin.php` (replace `myplugin` with name of your plugin):
 
 ```php
 <?php
@@ -32,6 +32,9 @@ use winternet\yii2wordpress\KernelRunner;
 require_once(__DIR__ .'/vendor/autoload.php');
 
 $config = [
+    'aliases' => [
+        '@myplugin' => __DIR__,  //this will become your namespace, eg. myplugin\models\MyModel
+    ],
     'language' => 'en-US',
     'components' => [
         'cache' => [
