@@ -7,7 +7,7 @@ Development of Wordpress plugins with Yii2 framework
 
 Create a new Wordpress plugin by creating a new folder in eg. `wp-content/plugins/awesome-plugin` and run/execute these tasks that that folder:
 
-- create `composer.json` with at least this (could not get it working without these settings):
+- create `composer.json` with at least this:
 
 ```php
 {
@@ -16,8 +16,7 @@ Create a new Wordpress plugin by creating a new folder in eg. `wp-content/plugin
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
-    ],
-    "minimum-stability": "dev"
+    ]
 }
 ```
 
