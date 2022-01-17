@@ -21,7 +21,7 @@ return [
     ],
     'basePath' => dirname(__DIR__, 6),
     'params' => [
-        'bsVersion' => 4
+        'bsVersion' => 4,
         'wpPluginFolderName' => $wpPluginFolderName,
     ],
     'controllerMap' => [
@@ -31,7 +31,7 @@ return [
                 '@app/Migrations',
                 '@Yii2Wordpress/Migrations',
             ],
-            'migrationTable' => 'migrations_' . StringHelper::standardize($wpPluginFolderName)
+            'migrationTable' => 'migrations_' . StringHelper::standardize($wpPluginFolderName),
         ],
     ],
     'bootstrap' => ['log','kernel'],
@@ -47,9 +47,9 @@ return [
                     'css' => [],
                 ],
                 'yii\bootstrap4\BootstrapPluginAsset' => [
-                    'js' => []
-                ]
-            ]
+                    'js' => [],
+                ],
+            ],
         ],
         'modelRegistry' => [
             'class' => 'winternet\yii2wordpress\Components\ModelRegistry',
@@ -60,7 +60,7 @@ return [
             'password' => DB_PASSWORD,
             'charset'  => DB_CHARSET,
             'dsn' => 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME,
-            'tablePrefix' => $GLOBALS['table_prefix']
+            'tablePrefix' => $GLOBALS['table_prefix'],
         ],
         'log' => [
             'targets' => [
@@ -74,7 +74,7 @@ return [
         ],
         // Application Kernel
         'kernel' => [
-            'class' => 'winternet\yii2wordpress\Components\Kernel'
-        ]
-    ]
+            'class' => 'winternet\yii2wordpress\Components\Kernel',
+        ],
+    ],
 ];
