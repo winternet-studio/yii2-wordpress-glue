@@ -2,9 +2,7 @@
 
 use winternet\yii2wordpress\Helpers\StringHelper;
 
-if (!isset($_ENV['WP_PLUGIN_FOLDERNAME'])) {
-    throw new \Exception('The $_ENV["WP_PLUGIN_FOLDERNAME"] is not set!');
-}
+$wpPluginFolderName = basename(dirname(__FILE__, 5));
 
 $assetDir = dirname(__DIR__, 7) . '/yii2wp_assets';
 if (!is_dir($assetDir)) {
@@ -24,6 +22,7 @@ return [
     'basePath' => dirname(__DIR__, 6),
     'params' => [
         'bsVersion' => 4
+        'wpPluginFolderName' => $wpPluginFolderName,
     ],
     'controllerMap' => [
         'migrate' => [
@@ -32,7 +31,7 @@ return [
                 '@app/Migrations',
                 '@Yii2Wordpress/Migrations',
             ],
-            'migrationTable' => 'migrations_' . StringHelper::standardize($_ENV['WP_PLUGIN_FOLDERNAME'])
+            'migrationTable' => 'migrations_' . StringHelper::standardize($wpPluginFolderName)
         ],
     ],
     'bootstrap' => ['log','kernel'],

@@ -32,13 +32,6 @@ class KernelRunner
         Yii::setAlias('@plugin', dirname(__FILE__, 5));
         Yii::setAlias('@pluginBootstrapFile', $wpPluginFile);
 
-        /**
-         * The origin Plugin Name
-         */
-        if (!isset($_ENV['WP_PLUGIN_FOLDERNAME'])) {
-            $_ENV['WP_PLUGIN_FOLDERNAME'] = basename(dirname(__FILE__, 5));
-        }
-
         $this->appConf = ArrayHelper::merge(
             require dirname(__FILE__, 2) . '/src/Resources/Services/services.php',
             $appConf

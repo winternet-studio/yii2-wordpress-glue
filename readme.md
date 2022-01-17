@@ -51,8 +51,8 @@ $config = [
     ],
 ];
 
-$isDebug = (isset($_ENV['DEBUG']) && $_ENV['DEBUG'] === true);
-$kernel = new KernelRunner($config, $isDebug);
+$isDebug = true;  //set true during development
+$kernel = new KernelRunner($config, null, $isDebug);
 $kernel->run();
 ```
 
