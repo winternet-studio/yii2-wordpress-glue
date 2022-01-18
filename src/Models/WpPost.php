@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace winternet\yii2wordpress\Models;
@@ -7,21 +6,28 @@ namespace winternet\yii2wordpress\Models;
 use yii\db\ActiveQuery;
 use winternet\yii2wordpress\Db\ActiveRecord;
 
-class WpPost extends ActiveRecord
-{
-    public static function tableName()
-    {
-        return '{{%posts}}';
-    }
+class WpPost extends ActiveRecord {
 
-    public function findPostPage(): ActiveQuery
-    {
-        $finder = static::find();
-        $finder->andWhere([
-            'post_type' => ['post','page'],
-            'post_status' => ['draft','publish','inherit']
-        ]);
+	public static function tableName() {
+		global $wpdb;
+		return $wpdb->posts;
+	}
 
-        return $finder;
-    }
+	public function findPostPage(): ActiveQuery {
+		$finder = static::find();
+		$finder->andWhere([
+			'post_type' => ['post', 'page'],
+			'post_status' => ['draft', 'publish', 'inherit'],
+		]);
+
+		return $finder;
+	}
+
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getMeta() {
+		return $this->hasMany(WpPostMeta::class, ['post_id' => 'ID']);
+	}
+
 }
