@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace winternet\yii2wordpress\Db;
+namespace winternet\yii2wordpress\db;
 
 use Yii;
 

@@ -1,132 +1,127 @@
 <?php
-
 declare(strict_types=1);
 
-namespace winternet\yii2wordpress\Widgets\Tabs;
+namespace winternet\yii2wordpress\widgets\tabs;
 
 use Yii;
 use yii\base\Widget;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use kartik\detail\DetailView;
-use winternet\yii2wordpress\Interfaces\TabAwareInterface;
+use winternet\yii2wordpress\interfaces\TabAwareInterface;
 use \admin_enqueue_scripts;
 
 /**
- * Displays Tabs in Backend for your Module.
- * Each Tab contains a Pjax-Container with a ActiveForm,
+ * Displays tabs in backend for your module.
+ * Each tab contains a Pjax-Container with an ActiveForm,
  * the FormFields are rendered via Model::formFields() Method.
  *
  * @todo Assets missing!
  */
-class Tabs extends Widget
-{
-    public function init()
-    {
-        parent::init();
+class Tabs extends Widget {
 
-        global $post;
-  
-        $view = $this->getView();
-        $view->registerAssetBundle(TabAssetBundle::class);
-        $view->registerAssetsToWp();
+	public function init() {
+		parent::init();
 
-        Yii::$app->modelRegistry
-            // Process only current post type
-            ->filterPostType($post->post_type)
-            // populate models
-            ->findByPostId($post->ID)
-            // validate again to show invalid data: persist cyclce has redirected.
-            ->validate()
-        ;
-    }
+		global $post;
 
-    protected function getIsNewRecord(): bool
-    {
-        global $pagenow;
+		$view = $this->getView();
+		$view->registerAssetBundle(TabAssetBundle::class);
+		$view->registerAssetsToWp();
 
-        return ($pagenow == 'post-new.php');
-    }
+		Yii::$app->modelRegistry
+			// Process only current post type
+			->filterPostType($post->post_type)
+			// populate models
+			->findByPostId($post->ID)
+			// validate again to show invalid data: persist cyclce has redirected.
+			->validate()
+		;
+	}
 
-    public function run()
-    {
-        $out = Html::beginTag('div', [
-            'id' => 'yii2wp_settings_tabs_wrapper',
-        ]);
+	protected function getIsNewRecord(): bool {
+		global $pagenow;
 
-        $out .= Html::beginTag('ul', [
-            'id' => 'yii2wp_settings_tabs',
-        ]);
+		return ($pagenow == 'post-new.php');
+	}
 
-        foreach (Yii::$app->modelRegistry->get() as $model) {
-            $out .= $this->renderTabListItem($model);
-        }
+	public function run() {
+		$out = Html::beginTag('div', [
+			'id' => 'yii2wp_settings_tabs_wrapper',
+		]);
 
-        $out .= Html::endTag('ul');
+		$out .= Html::beginTag('ul', [
+			'id' => 'yii2wp_settings_tabs',
+		]);
 
-        foreach (Yii::$app->modelRegistry->get() as $model) {
-            $out .= $this->renderTabContent($model);
-        }
+		foreach (Yii::$app->modelRegistry->get() as $model) {
+			$out .= $this->renderTabListItem($model);
+		}
 
-        $out .= Html::endTag('div');
+		$out .= Html::endTag('ul');
 
-        echo $out;
-    }
+		foreach (Yii::$app->modelRegistry->get() as $model) {
+			$out .= $this->renderTabContent($model);
+		}
 
-    protected function renderTabListItem(TabAwareInterface $model): string
-    {
-        $out = Html::beginTag('li');
+		$out .= Html::endTag('div');
 
-        $href = '#' . crc32(get_class($model)) . '-tab';
-        $out .= Html::a(
-            '<span>'. $model->getTabLabel() .'</span>',
-            $href,
-            ['id' => 'tab-' . $model->formName()]
-        );
-        $out .= Html::endTag('li');
+		echo $out;
+	}
 
-        return $out;
-    }
+	protected function renderTabListItem(TabAwareInterface $model): string {
+		$out = Html::beginTag('li');
 
-    protected function renderTabContent(TabAwareInterface $model): string
-    {
-        $cssId = crc32(get_class($model)) . '-tab';
+		$href = '#' . crc32(get_class($model)) . '-tab';
+		$out .= Html::a(
+			'<span>'. $model->getTabLabel() .'</span>',
+			$href,
+			['id' => 'tab-' . $model->formName()]
+		);
+		$out .= Html::endTag('li');
 
-        $out = Html::beginTag('div', [
-            'id' => $cssId,
-            'class' => 'yii2wp-tab'
-        ]);
+		return $out;
+	}
 
-        // add css class for Input-errors
-        $attributes = $model->formFields();
+	protected function renderTabContent(TabAwareInterface $model): string {
+		$cssId = crc32(get_class($model)) . '-tab';
 
-        if ($model->hasErrors()) {
-            foreach ($attributes as $key => $attribute) {
-                if (
-                    !isset($attribute['attribute'])
-                    || !$model->hasErrors($attribute['attribute'])) {
-                    continue;
-                }
+		$out = Html::beginTag('div', [
+			'id' => $cssId,
+			'class' => 'yii2wp-tab',
+		]);
 
-                $options = ArrayHelper::getValue($attributes, $key . '.options', []);
-                Html::addCssClass($options, ['ui-state-error','ui-corner-all']);
-                ArrayHelper::setValue($attributes, $key . '.options', $options);
-            }
-        }
+		// add css class for Input-errors
+		$attributes = $model->formFields();
 
-        $out .= DetailView::widget([
-            'formClass' => ActiveForm::class,
-            'model' => $model,
-            'attributes' => $attributes,
-            'mode' => DetailView::MODE_EDIT,
-            'bootstrap' => false,
-            'mainTemplate' => '{detail}',
-            'hAlign' => 'left',
-            'options' => ['style' => 'width:100%']
-        ]);
+		if ($model->hasErrors()) {
+			foreach ($attributes as $key => $attribute) {
+				if (
+					!isset($attribute['attribute'])
+					|| !$model->hasErrors($attribute['attribute'])) {
+					continue;
+				}
 
-        $out .= Html::endTag('div');
+				$options = ArrayHelper::getValue($attributes, $key . '.options', []);
+				Html::addCssClass($options, ['ui-state-error','ui-corner-all']);
+				ArrayHelper::setValue($attributes, $key . '.options', $options);
+			}
+		}
 
-        return $out;
-    }
+		$out .= DetailView::widget([
+			'formClass' => ActiveForm::class,
+			'model' => $model,
+			'attributes' => $attributes,
+			'mode' => DetailView::MODE_EDIT,
+			'bootstrap' => false,
+			'mainTemplate' => '{detail}',
+			'hAlign' => 'left',
+			'options' => ['style' => 'width:100%'],
+		]);
+
+		$out .= Html::endTag('div');
+
+		return $out;
+	}
+
 }

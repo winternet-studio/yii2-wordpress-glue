@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace winternet\yii2wordpress\Models;
+namespace winternet\yii2wordpress\models;
 
 use yii\db\ActiveQuery;
-use winternet\yii2wordpress\Db\ActiveRecord;
+use winternet\yii2wordpress\db\ActiveRecord;
 
 class WpPost extends ActiveRecord {
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace winternet\yii2wordpress\Helpers;
+namespace winternet\yii2wordpress\helpers;
 
 /*
  * ```php

@@ -1,163 +1,152 @@
 <?php
-
 declare(strict_types=1);
 
-namespace winternet\yii2wordpress\Components;
+namespace winternet\yii2wordpress\components;
 
 use Yii;
 use yii\base\Component;
-use winternet\yii2wordpress\Interfaces\WpPostInterface;
+use winternet\yii2wordpress\interfaces\WpPostInterface;
 
 /**
  * Model registry holds all models which are affected by WordPress CRUD-Operations.
  * In fact, the basic AR-Operations such like load(), save(), findByPostId() are available
- * in Batch-Mode for all registered Models.
+ * in batch mode for all registered models.
  */
-class ModelRegistry extends Component
-{
-    /**
-     * @var WpPostInterface[]
-     */
-    private $registry = [];
+class ModelRegistry extends Component {
 
-    /**
-     * @var String[] process only Models attached to this post types
-     * @see WpPostInterface
-     */
-    private $postTypes = [];
+	/**
+	 * @var WpPostInterface[]
+	 */
+	private $registry = [];
 
-    /**
-     * Process only models attached to this Type.
-     *
-     * @param mixed $type array|string|null null disables this filter
-     *
-     * @return ModelRegistry
-     */
-    public function filterPostType($types=null): ModelRegistry
-    {
-        if (is_string($types)) {
-            $types = [$types];
-        }
+	/**
+	 * @var String[] process only models attached to this post types
+	 * @see WpPostInterface
+	 */
+	private $postTypes = [];
 
-        $this->postTypes = $types;
+	/**
+	 * Process only models attached to this Type.
+	 *
+	 * @param mixed $type array|string|null null disables this filter
+	 *
+	 * @return ModelRegistry
+	 */
+	public function filterPostType($types=null): ModelRegistry {
+		if (is_string($types)) {
+			$types = [$types];
+		}
 
-        return $this;
-    }
+		$this->postTypes = $types;
 
-    /**
-     * whether the registry holds Models assigned to this wp post types
-     *
-     * @param string|array post types to check
-     *
-     * @return bool
-     */
-    public function hasPostType($types): bool
-    {
-        if (is_string($types)) {
-            $types = [$types];
-        }
+		return $this;
+	}
 
-        return $this->get($types) ? true : false;
-    }
+	/**
+	 * whether the registry holds models assigned to this wp post types
+	 *
+	 * @param string|array post types to check
+	 *
+	 * @return bool
+	 */
+	public function hasPostType($types): bool {
+		if (is_string($types)) {
+			$types = [$types];
+		}
 
-    public function setPostId($postId): ModelRegistry
-    {
-        foreach ($this->getInternal($this->postTypes) as $model) {
-            $model->pid = $postId;
-        }
+		return $this->get($types) ? true : false;
+	}
 
-        return $this;
-    }
+	public function setPostId($postId): ModelRegistry {
+		foreach ($this->getInternal($this->postTypes) as $model) {
+			$model->pid = $postId;
+		}
 
-    /**
-     * adds a Model to the registry
-     *
-     * @param Model $model the model instance
-     */
-    public function add(WpPostInterface $model): ModelRegistry
-    {
-        $this->registry[get_class($model)] = $model;
+		return $this;
+	}
 
-        return $this;
-    }
+	/**
+	 * adds a Model to the registry
+	 *
+	 * @param Model $model the model instance
+	 */
+	public function add(WpPostInterface $model): ModelRegistry {
+		$this->registry[get_class($model)] = $model;
 
-    /**
-     * get all Models from registry.
-     *
-     * @param array $types posttypes to return
-     *
-     * @return array of Model instances.
-     */
-    protected function getInternal(array $types=null): array
-    {
-        if ($types && is_array($types)) {
-            $registry = [];
-            foreach ($this->registry as $model) {
-                if (in_array($model->getWpType(), $types)) {
-                    $registry[get_class($model)] = $model;
-                }
-            }
-            return $registry;
-        }
+		return $this;
+	}
 
-        return $this->registry;
-    }
+	/**
+	 * get all models from registry.
+	 *
+	 * @param array $types posttypes to return
+	 *
+	 * @return array of Model instances.
+	 */
+	protected function getInternal(array $types=null): array {
+		if ($types && is_array($types)) {
+			$registry = [];
+			foreach ($this->registry as $model) {
+				if (in_array($model->getWpType(), $types)) {
+					$registry[get_class($model)] = $model;
+				}
+			}
+			return $registry;
+		}
 
-    public function get(): array
-    {
-        return $this->getInternal($this->postTypes);
-    }
+		return $this->registry;
+	}
 
-    /**
-     * adds multiple Model in Batch
-     * @see [add]
-     */
-    public function addMultiple(array $models): ModelRegistry
-    {
-        foreach ($models as $model) {
-            $this->add($model);
-        }
+	public function get(): array {
+		return $this->getInternal($this->postTypes);
+	}
 
-        return $this;
-    }
+	/**
+	 * adds multiple Model in Batch
+	 * @see [add]
+	 */
+	public function addMultiple(array $models): ModelRegistry {
+		foreach ($models as $model) {
+			$this->add($model);
+		}
 
-    public function load($data): ModelRegistry
-    {
-        foreach ($this->getInternal($this->postTypes) as $model) {
-            $model->load($data);
-        }
+		return $this;
+	}
 
-        return $this;
-    }
+	public function load($data): ModelRegistry {
+		foreach ($this->getInternal($this->postTypes) as $model) {
+			$model->load($data);
+		}
 
-    public function findByPostId($postId): ModelRegistry
-    {
-        foreach ($this->getInternal($this->postTypes) as $key => $model) {
-            $finder = $model::find();
-            $populatedAr = $finder->andWhere(['pid' => $postId])->one();
-            if ($populatedAr) {
-                $this->registry[$key] = $populatedAr;
-            }
-        }
+		return $this;
+	}
 
-        return $this;
-    }
+	public function findByPostId($postId): ModelRegistry {
+		foreach ($this->getInternal($this->postTypes) as $key => $model) {
+			$finder = $model::find();
+			$populatedAr = $finder->andWhere(['pid' => $postId])->one();
+			if ($populatedAr) {
+				$this->registry[$key] = $populatedAr;
+			}
+		}
 
-    public function persist($validate=true, array $types=[]): ModelRegistry
-    {
-        foreach ($this->getInternal($this->postTypes) as $model) {
-            $model->save($validate);
-        }
+		return $this;
+	}
 
-        return $this;
-    }
+	public function persist($validate=true, array $types=[]): ModelRegistry {
+		foreach ($this->getInternal($this->postTypes) as $model) {
+			$model->save($validate);
+		}
 
-    public function validate(): ModelRegistry
-    {
-        foreach ($this->getInternal($this->postTypes) as $model) {
-            $model->validate();
-        }
+		return $this;
+	}
 
-        return $this;
-    }
+	public function validate(): ModelRegistry {
+		foreach ($this->getInternal($this->postTypes) as $model) {
+			$model->validate();
+		}
+
+		return $this;
+	}
+
 }

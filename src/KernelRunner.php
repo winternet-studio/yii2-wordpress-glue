@@ -33,7 +33,7 @@ class KernelRunner
         Yii::setAlias('@pluginBootstrapFile', $wpPluginFile);
 
         $this->appConf = ArrayHelper::merge(
-            require dirname(__FILE__, 2) . '/src/Resources/Services/services.php',
+            require dirname(__FILE__, 2) . '/src/resources/services/services.php',
             $appConf
         );
     }
@@ -83,7 +83,7 @@ class KernelRunner
             if (!Yii::$app->modelRegistry->hasPosttype($post->post_type)) {
                 return;
             }
-            echo Widgets\Tabs\Tabs::widget();
+            echo widgets\tabs\Tabs::widget();
         });
 
         /**
@@ -94,7 +94,7 @@ class KernelRunner
             $post = get_post($post_id);
 
             Yii::$app->modelRegistry
-                // only process Models attached to post_type
+                // only process models attached to post_type
                 ->filterPostType($post->post_type)
                 // populate (find) data from Database
                 ->findByPostId($post_id)

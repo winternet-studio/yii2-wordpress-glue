@@ -1,8 +1,7 @@
 <?php
-
 declare(strict_types=1);
 
-namespace winternet\yii2wordpress\Widgets\Tabs;
+namespace winternet\yii2wordpress\widgets\tabs;
 
 /**
  * Wordpress render its own <form>-Tags.
@@ -10,14 +9,14 @@ namespace winternet\yii2wordpress\Widgets\Tabs;
  *
  * {@inheritdoc}
  */
-class ActiveForm extends \yii\widgets\ActiveForm
-{
-    public function run()
-    {
-        if (!empty($this->_fields)) {
-            throw new \InvalidCallException('Each beginField() should have a matching endField() call.');
-        }
+class ActiveForm extends \yii\widgets\ActiveForm {
 
-        return \ob_get_clean();
-    }
+	public function run() {
+		if (!empty($this->_fields)) {
+			throw new \InvalidCallException('Each beginField() should have a matching endField() call.');
+		}
+
+		return \ob_get_clean();
+	}
+
 }

@@ -1,6 +1,5 @@
 <?php
-
-use winternet\yii2wordpress\Helpers\StringHelper;
+use winternet\yii2wordpress\helpers\StringHelper;
 
 $wpPluginFolderName = basename(dirname(__FILE__, 5));
 
@@ -28,8 +27,8 @@ return [
         'migrate' => [
             'class' => 'yii\console\controllers\MigrateController',
             'migrationPath' => [
-                '@app/Migrations',
-                '@Yii2Wordpress/Migrations',
+                '@app/migrations',
+                '@Yii2Wordpress/migrations',
             ],
             'migrationTable' => 'migrations_' . StringHelper::standardize($wpPluginFolderName),
         ],
@@ -37,7 +36,7 @@ return [
     'bootstrap' => ['log','kernel'],
     'components' => [
         'view' => [
-            'class' => 'winternet\yii2wordpress\Components\View',
+            'class' => 'winternet\yii2wordpress\components\View',
         ],
         'assetManager' => [
             'basePath' => '@assetCache',
@@ -52,7 +51,7 @@ return [
             ],
         ],
         'modelRegistry' => [
-            'class' => 'winternet\yii2wordpress\Components\ModelRegistry',
+            'class' => 'winternet\yii2wordpress\components\ModelRegistry',
         ],
         'db' => [
             'class' => 'yii\db\Connection',
@@ -74,7 +73,7 @@ return [
         ],
         // Application Kernel
         'kernel' => [
-            'class' => 'winternet\yii2wordpress\Components\Kernel',
+            'class' => 'winternet\yii2wordpress\components\Kernel',
         ],
     ],
 ];
